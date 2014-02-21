@@ -16,33 +16,34 @@ var findColumns = function(string) {
   return Math.ceil(Math.sqrt(string.length));
 };
 
-// var encrypts = function(string) {
-//   var newString = "";
-//   var rowIncrement = findRows(string);
-//   var columnIncrement = findColumns(string);
-//   for (var i=0; i <= rowIncrement; i++){
-//     alert('starting for loop');
-//     newString += string.charAt(0 + columnIncrement);
-//     alert(newString);
-//     columnIncrement *= i;
-//     alert(columnIncrement);
-//   }
-
-//   return newString;
-// };
-
 var encrypts = function(string) {
-  var newArray = [];
+  var string = prepSentence(string);
   var newSentence = "";
   var x = findColumns(string);
-  for (var i = 0; i < findRows(string); i++) {
-    newArray.push(string.slice(i * x, (i + 1) * x)); 
-  }
-  for (var j = 0; j < newArray.length; j++) {
-    for (var p = 0; p < newArray[j].length; p++) {
-      newSentence += newArray[p].charAt([j]);
+  for (var j=0; j < x; j++) {
+    for (var i=0; i < string.length; i += x) {
+       newSentence += string.charAt(i + j);
     }
   }
-
-  return newSentence;
+  return blocks(newSentence);
 };
+
+var blocks = function(string) {
+  var newString = ''
+  for (var i = 0; i < string.length ; i = i + 5) {
+      newString += string.slice(i, i+5) + " ";
+  }
+
+  return newString.slice(0, newString.length - 1);
+
+};
+
+$(document).ready(function() {
+  $('form#cryptoform').keyup(function() {
+    var sentence = $('textarea#sentence').val(); 
+    var encryptedSentence = encrypts(sentence);
+
+    $('#textDisplay').text(encryptedSentence);
+
+  });
+});

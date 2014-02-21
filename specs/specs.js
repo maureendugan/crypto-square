@@ -38,13 +38,24 @@ describe('findColumns', function() {
 describe('encrypts', function() {
 
   it('encrypts sentence', function () {
-    encrypts('abcdefghi').should.equal("adgbehcfi");
+    encrypts('abcdefghi').should.equal("adgbe hcfi");
   });
 
-  it ('encrypts a longer sentence', function () {
-    encrypts('abcdabcdabcdabcd').should.equal('aaaabbbbccccdddd');
+  it('encrypts a longer sentence', function () {
+    encrypts('abcdabcdabcdabcd').should.equal('aaaab bbbcc ccddd d');
   });
 
+  it('encrypts any sentence', function() {
+    encrypts('abc $dabcdab,.c!d?abcd').should.equal('aaaab bbbcc ccddd d');
+  });
 
+  it('encrypts a sentence with a length thats not a perfect square', function() {
+    encrypts('abcabcab').should.equal('aaabb bcc');
+  });
 });
 
+describe('blocks', function() {
+  it('enters a space every 5 letters in a string', function() {
+    blocks('aaaaabbbbbccccc').should.equal('aaaaa bbbbb ccccc');
+  });
+});
