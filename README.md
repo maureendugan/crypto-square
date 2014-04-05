@@ -27,4 +27,4 @@ For example, a message 4 characters long should use a 2 x 2 square. A message th
 Output the encoded text in groups of five letters. For example:
 
 encrypt("Have a nice day. Feed the dog & chill out!");
-# => "hifei acedl v..."
+-->"hifei acedl v..."
